@@ -11,6 +11,7 @@ namespace TurtleChallenge
     public class TurtleGame
     {
         private DirectionEnum _direction;
+        private readonly DirectionEnum _initialDirection;
         private readonly BoardTileEnum[,] _mineField;
         private LocationData _location;
         private LocationData _startLocation;
@@ -24,6 +25,7 @@ namespace TurtleChallenge
         {
             _boardSetting = boardSetting.Copy();
             _mineField = new BoardTileEnum[boardSetting.X, boardSetting.Y];
+            _initialDirection = initialDirection;
             _direction = initialDirection;
             _location = startlocation.Copy();
             _startLocation = startlocation.Copy();
@@ -91,7 +93,7 @@ namespace TurtleChallenge
             change = Math.Abs(change) % 4;
             return (DirectionEnum)Enum.ToObject(typeof(DirectionEnum), change);
         }
-        public void UpdateTurtleStatus()
+        private void UpdateTurtleStatus()
         {
             var currentTile = _mineField[_location.X, _location.Y];
             if (currentTile == BoardTileEnum.Exit)
@@ -110,7 +112,7 @@ namespace TurtleChallenge
         {
             _status = TurtleStatusEnum.Danger;
             _location = _startLocation.Copy();
-            _direction = DirectionEnum.N;
+            _direction = _initialDirection;
         }
         private void PrintBoard()
         {
@@ -127,5 +129,8 @@ namespace TurtleChallenge
             }
             Console.WriteLine($"=====================================X:{_location.X}===Y:{_location.Y}===Direction:{_direction}===================================================#>");
         }
+        public LocationData GetLocation => _location;
+        public DirectionEnum GetDirection => _direction;
+        public TurtleStatusEnum GetStatus => _status;
     }
 }

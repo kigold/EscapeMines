@@ -14,6 +14,7 @@ namespace TurtleChallenge
             var path = "C:\\Users\\kingslee\\Desktop\\Turtle.txt";
             //path = args[0];
             TurtleChallengeSolution.Run(path);
+            Console.Read();
         }
     }
 }

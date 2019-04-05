@@ -14,5 +14,9 @@ namespace TurtleChallenge.Data
         {
             return new LocationData { X = this.X, Y = this.Y };
         }
+        public bool IsEqual(LocationData obj)
+        {
+            return (obj.X == X && obj.Y == Y);
+        }
     }
 }
